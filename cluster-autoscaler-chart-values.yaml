@@ -1,0 +1,13 @@
+rbac:
+  create: true
+
+cloudProvider: aws
+awsRegion: eu-west-1
+
+autoDiscovery:
+  clusterName: test
+  enabled: true
+
+image:
+  repository: us.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler
+  tag: v1.19.1
