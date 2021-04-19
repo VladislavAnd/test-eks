@@ -8,7 +8,7 @@
 
 1. Запускаем из дирректории проекта докер, для дальнейшей работы:
   
-        docker run --rm -it -v $(pwd)/src -v ~/.aws:/root/aws dockervalexe/test-eks-tools:latest
+        docker run --rm -it -w /src -v $(pwd)/src -v ~/.aws:/root/aws dockervalexe/test-eks-tools:latest
 
 1. Создаем инфраструктуру (подразумевается, что креды для AWS уже переданы):
   
@@ -29,12 +29,13 @@
 1. Получаем список рабочих pods:
   
         kubectl get pods
+        
 
 1. Деплоим 25 экземпляров:
    
         kubectl scale deployment/test --replicas 25
 
-1. Видим, что часть нод не смогло задеплоиться:  
+1. Видим, что часть подов не смогло задеплоиться:  
 	
         # kubectl  get pods 
         NAME                    READY   STATUS    RESTARTS   AGE
@@ -68,7 +69,7 @@
         NAME                                     STATUS   ROLES    AGE   VERSION
         ip-10-0-0-6.eu-west-1.compute.internal   Ready    <none>   26m   v1.19.6-eks-49a6c0
 
-1. Ждем 5 минут и видим, что список нод изменился и остальные поды (кроме одной, тк для нашего типа инстанса максимум 11 под, те все 33 пода, а у нас получается 34 (9 системных и 25 мы запросили) ) смогли задеплоится:
+1. Ждем 5 минут и видим, что список нод изменился и остальные поды (кроме одной, тк для нашего типа инстанса максимум 11 под, те всего 33 пода, а у нас получается 34 (9 системных и 25 мы запросили) ) смогли задеплоиться:
 
         # kubectl  get pods 
         NAME                    READY   STATUS    RESTARTS   AGE
